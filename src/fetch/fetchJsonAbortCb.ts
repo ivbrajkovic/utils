@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import fetchJsonAsync from "./fetchJsonAsync";
 
 /**
@@ -6,7 +8,11 @@ import fetchJsonAsync from "./fetchJsonAsync";
  * @param {object} options fetch options
  * @param {fn} cb callback function
  */
-const fetchJsonAbortCb = (url, options = {}, cb) => {
+const fetchJsonAbortCb = (
+  url: string,
+  options: RequestInit = {},
+  cb: (err: string | null, data?: any) => void
+): (() => void) => {
   const abortController = new AbortController();
   const signal = abortController.signal;
 
