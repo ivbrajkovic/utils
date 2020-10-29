@@ -1,6 +1,6 @@
 {
   "hooks": {
-    "before:init": ["npm run lint", "npm run tsc"],
+    "after:bump": "echo npm publish --access public",
     "after:git:release": "echo After git push, before github release",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },
@@ -10,11 +10,10 @@
     "requireBranch": false,
     "requireUpstream": true,
     "requireCommits": false,
-    "addUntrackedFiles": false,
+    "addUntrackedFiles": true,
     "commit": true,
     "commitMessage": "Release ${version}",
     "commitArgs": [],
-    "tag": true,
     "tagName": null,
     "tagAnnotation": "Release ${version}",
     "tagArgs": [],
@@ -23,12 +22,11 @@
     "pushRepo": "https://github.com/ivbrajkovic/utils"
   },
   "npm": {
-    "publish": true,
-    "publishPath": ".",
-    "tag": null,
-    "otp": null,
-    "ignoreVersion": false,
-    "skipChecks": false,
-    "timeout": 10
+    "publish": false
+  },
+  "plugins": {
+    "@release-it/bumper": {
+      "out": "package.json"
+    }
   }
 }
