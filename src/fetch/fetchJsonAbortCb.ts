@@ -11,7 +11,7 @@ import fetchJsonAsync from "./fetchJsonAsync";
 const fetchJsonAbortCb = (
   url: string,
   options: RequestInit = {},
-  cb: (err: string | null, data?: any) => void
+  cb: (err: Error | null, data?: any) => void
 ): (() => void) => {
   const abortController = new AbortController();
   const signal = abortController.signal;
