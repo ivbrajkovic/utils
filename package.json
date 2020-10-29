@@ -1,6 +1,6 @@
 {
   "name": "@ivbrajkovic/utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,9 @@
     "url": "git+https://github.com/ivbrajkovic/utils.git"
   },
   "keywords": [
-    "utils"
+    "utils",
+    "utility",
+    "utility functions"
   ],
   "author": "Ivan",
   "license": "ISC",
