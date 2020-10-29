@@ -3,5 +3,23 @@
     "before:init": ["npm run lint", "npm run tsc"],
     "after:git:release": "echo After git push, before github release",
     "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  },
+  "git": {
+    "changelog": "git log --pretty=format:\"* %s (%h)\" ${from}...${to}",
+    "requireCleanWorkingDir": false,
+    "requireBranch": false,
+    "requireUpstream": true,
+    "requireCommits": false,
+    "addUntrackedFiles": false,
+    "commit": true,
+    "commitMessage": "Release ${version}",
+    "commitArgs": [],
+    "tag": true,
+    "tagName": null,
+    "tagAnnotation": "Release ${version}",
+    "tagArgs": [],
+    "push": true,
+    "pushArgs": ["--follow-tags"],
+    "pushRepo": "https://github.com/ivbrajkovic/utils"
   }
 }

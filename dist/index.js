@@ -6,3 +6,4 @@ var fetchJsonAsync_1 = require("./fetch/fetchJsonAsync");
 exports.fetchJsonAsync = fetchJsonAsync_1.default;
 var fetchJsonAbortCb_1 = require("./fetch/fetchJsonAbortCb");
 exports.fetchJsonAbortCb = fetchJsonAbortCb_1.default;
+console.log("test");
