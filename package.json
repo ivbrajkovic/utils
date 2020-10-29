@@ -1,11 +1,13 @@
 {
   "name": "@ivbrajkovic/utils",
-  "version": "1.0.6",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+    "publish": "npm publish --access public",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
