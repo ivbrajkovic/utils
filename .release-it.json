@@ -21,5 +21,14 @@
     "push": true,
     "pushArgs": ["--follow-tags"],
     "pushRepo": "https://github.com/ivbrajkovic/utils"
+  },
+  "npm": {
+    "publish": true,
+    "publishPath": ".",
+    "tag": null,
+    "otp": null,
+    "ignoreVersion": false,
+    "skipChecks": false,
+    "timeout": 10
   }
 }
