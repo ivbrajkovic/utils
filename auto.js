@@ -16,15 +16,21 @@ let isLintAndCompile = true;
 let isBump = true;
 let isGit = true;
 let isNpm = true;
+let isDeafultComment = false;
 
+// Parse commandline args
 const myArgs = process.argv.slice(2);
 myArgs.forEach((arg) => {
-  if (arg.includes("v:")) incerment = /v:(.)/.exec(arg)[1];
-  else if (arg.includes("b:")) isBump = /b:(.+)/.exec(arg)[1] === "true";
-  else if (arg.includes("g:")) isGit = /g:(.+)/.exec(arg)[1] === "true";
-  else if (arg.includes("n:")) isNpm = /n:(.+)/.exec(arg)[1] === "true";
-  else if (arg.includes("l:"))
-    isLintAndCompile = /l:(.+)/.exec(arg)[1] === "true";
+  let match;
+  if ((match = /v:(.)/.exec(arg))) incerment = match[1];
+  else if ((match = /b:(\d)/.exec(arg))) isBump = match[1] === "1";
+  else if ((match = /n:(\d)/.exec(arg))) isNpm = match[1] === "1";
+  else if ((match = /l:(\d)/.exec(arg))) isLintAndCompile = match[1] === "1";
+  else if ((match = /g:(\d):?(\d)?/gm.exec(arg))) {
+    if (!match) return;
+    isGit = match[1] === "1";
+    isDeafultComment = match[2] === "1";
+  }
 });
 
 printHeader("Automation script");
@@ -35,7 +41,9 @@ console.log(
   "version", incerment, "\n",
   "isBump", isBump, "\n",
   "isGit", isGit, "\n",
-  "isNpm", isNpm, "\n");
+  "isDeafultComment", isDeafultComment, "\n",
+  "isNpm", isNpm, "\n"
+);
 
 /***********************************************************
  * Print helpers
@@ -151,10 +159,14 @@ async function gitPush() {
     printHeader("Push to github");
     execCommand("git", ["add", "."]);
 
-    let comment = await readLineAsync(
-      `Enter comment (Release v${packageJson.version}): `
-    );
+    let comment;
+    if (!isDeafultComment) {
+      comment = await readLineAsync(
+        `Enter comment (Release v${packageJson.version}): `
+      );
+    }
     if (!comment) comment = `Release v${packageJson.version}`;
+
     console.log("gitPush -> comment", comment);
 
     execCommand("git", ["commit", "-m", `"${comment}"`]);
