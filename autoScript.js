@@ -159,17 +159,17 @@ async function gitPush() {
     printHeader("Push to github");
     execCommand("git", ["add", "."]);
 
-    let comment;
+    let message;
     if (!isDeafultComment) {
-      comment = await readLineAsync(
-        `Enter comment (Release v${packageJson.version}): `
+      message = await readLineAsync(
+        `Commit message (Release v${packageJson.version}): `
       );
     }
-    if (!comment) comment = `Release v${packageJson.version}`;
+    if (!message) message = `Release v${packageJson.version}`;
 
-    console.log("gitPush -> comment", comment);
+    printInfo("Commit message", message);
 
-    execCommand("git", ["commit", "-m", `"${comment}"`]);
+    execCommand("git", ["commit", "-m", `"${message}"`]);
     execCommand("git", ["push"]);
     printFooter("Success");
   } catch (error) {
