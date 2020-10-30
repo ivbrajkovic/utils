@@ -157,7 +157,7 @@ async function gitPush() {
     if (!comment) comment = `Release v${packageJson.version}`;
     console.log("gitPush -> comment", comment);
 
-    execCommand("git", ["commit", `-m "${comment}"`]);
+    execCommand("git", ["commit", "-m", `"${comment}"`]);
     execCommand("git", ["push"]);
     printFooter("Success");
   } catch (error) {
