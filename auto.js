@@ -179,7 +179,7 @@ async function npmPublish() {
   try {
     // NPM publish
     printHeader("Publish package to NPM");
-    execCommand("npm publish --access public");
+    execCommand("npm publish --access=public");
     printFooter("Success");
   } catch (error) {
     printErrorAndExit(error.message);
