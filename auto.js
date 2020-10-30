@@ -178,9 +178,17 @@ async function gitPush() {
 async function npmPublish() {
   try {
     // NPM publish
-    printHeader("Publish package to NPM");
-    execCommand("npm publish --access=public");
-    printFooter("Success");
+    // printHeader("Publish package to NPM");
+    // execCommand("npm publish --access=public");
+    // printFooter("Success");
+    childProcess.execSync(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+      }
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
+    });
   } catch (error) {
     printErrorAndExit(error.message);
   }
