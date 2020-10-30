@@ -1,13 +1,13 @@
 {
   "name": "@ivbrajkovic/utils",
-  "version": "1.0.12",
+  "version": "1.0.19",
   "description": "",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "npx eslint . --ext .ts,.tsx",
     "publish": "npm publish --access public",
-    "release": "release-it"
+    "auto": "node auto.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/ivbrajkovic/utils#readme",
   "devDependencies": {
-    "@release-it/bumper": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "@typescript-eslint/parser": "^4.6.0",
     "typescript": "^4.0.5"
