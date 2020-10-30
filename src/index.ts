@@ -8,5 +8,3 @@ import fetchJsonAbortCb from "./fetch/fetchJsonAbortCb";
 // module.exports = { fetchJsonAsync };
 
 export { fetchJsonAsync, fetchJsonAbortCb };
-
-console.log("test");

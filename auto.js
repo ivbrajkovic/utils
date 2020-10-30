@@ -27,7 +27,7 @@ myArgs.forEach((arg) => {
     isLintAndCompile = /l:(.+)/.exec(arg)[1] === "true";
 });
 
-printHeader("Automation script", true);
+printHeader("Automation script");
 
 // prettier-ignore
 console.log(
@@ -62,19 +62,14 @@ function printInfo(info, value) {
  * Execute command on child process
  */
 function execCommand(command, args) {
-  // const { status } = childProcess.execSync(command, args, {
-  try {
-    childProcess.execSync(command, {
-      cwd: process.cwd(),
-      env: process.env,
-      stdio: [process.stdin, process.stdout, process.stderr],
-      encoding: "utf-8",
-      shell: true,
-    });
-  } catch (error) {
-    throw new Error(`Error: '${error}' failed`);
-  }
-  // if (status !== 0) throw new Error(`Error: '${command}' failed`);
+  const { status } = childProcess.spawnSync(command, args, {
+    // cwd: process.cwd(),
+    // env: process.env,
+    stdio: "inherit",
+    // encoding: "utf-8",
+    // shell: true,
+  });
+  if (status !== 0) throw new Error(`Error: '${command}' failed`);
 }
 
 /***********************************************************
@@ -91,14 +86,9 @@ async function readLineAsync(question) {
  */
 function lintAndCompile() {
   try {
-    // Lint typescript
-    printHeader("Start lint");
-    execCommand("npm run lint");
-    printFooter("Success");
-
-    // Compile typescript
-    printHeader("Compile typescript");
-    execCommand("npm run tsc");
+    printHeader("Lint and TS compile");
+    execCommand("npm.cmd", ["run", "lint"]);
+    execCommand("npm.cmd", ["run", "tsc"]);
     printFooter("Success");
   } catch (error) {
     printErrorAndExit(error.message);
@@ -112,7 +102,7 @@ async function updateVersion(ch) {
   if (!/r|m|p|s/.test(ch)) ch = null;
 
   try {
-    printHeader("Bump 'package.json'", true);
+    printHeader("Bump 'package.json'");
 
     // Get version from package.json
     const regex = /^(\d+).(\d+).(\d+)$/g;
@@ -158,8 +148,8 @@ async function updateVersion(ch) {
 async function gitPush() {
   try {
     // Track all files
-    printHeader("Push to github", true);
-    execCommand("git add .");
+    printHeader("Push to github");
+    execCommand("git", ["add", "."]);
 
     let comment = await readLineAsync(
       `Enter comment (Release v${packageJson.version}): `
@@ -167,8 +157,8 @@ async function gitPush() {
     if (!comment) comment = `Release v${packageJson.version}`;
     console.log("gitPush -> comment", comment);
 
-    execCommand(`git commit -m "${comment}"`);
-    execCommand(`git push`);
+    execCommand("git", ["commit", "-m", comment]);
+    execCommand("git", ["push"]);
     printFooter("Success");
   } catch (error) {
     printErrorAndExit(error.message);
@@ -178,17 +168,9 @@ async function gitPush() {
 async function npmPublish() {
   try {
     // NPM publish
-    // printHeader("Publish package to NPM");
-    // execCommand("npm publish --access=public");
-    // printFooter("Success");
-    childProcess.execSync(command, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`exec error: ${error}`);
-        return;
-      }
-      console.log(`stdout: ${stdout}`);
-      console.error(`stderr: ${stderr}`);
-    });
+    printHeader("Publish package to NPM");
+    execCommand("npm.cmd", ["publish", "--access=public"]);
+    printFooter("Success");
   } catch (error) {
     printErrorAndExit(error.message);
   }
