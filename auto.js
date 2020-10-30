@@ -11,7 +11,7 @@ const readline = require("readline").createInterface({
   output: process.stdout,
 });
 
-let version;
+let incerment;
 let isLintAndCompile = true;
 let isBump = true;
 let isGit = true;
@@ -19,7 +19,7 @@ let isNpm = true;
 
 const myArgs = process.argv.slice(2);
 myArgs.forEach((arg) => {
-  if (arg.includes("v:")) version = /v:(.)/.exec(arg)[1];
+  if (arg.includes("v:")) incerment = /v:(.)/.exec(arg)[1];
   else if (arg.includes("b:")) isBump = /b:(.+)/.exec(arg)[1] === "true";
   else if (arg.includes("g:")) isGit = /g:(.+)/.exec(arg)[1] === "true";
   else if (arg.includes("n:")) isNpm = /n:(.+)/.exec(arg)[1] === "true";
@@ -32,7 +32,7 @@ printHeader("Automation script");
 // prettier-ignore
 console.log(
   " isLintAndCompile", isLintAndCompile, "\n",
-  "version", version, "\n",
+  "version", incerment, "\n",
   "isBump", isBump, "\n",
   "isGit", isGit, "\n",
   "isNpm", isNpm, "\n");
@@ -63,11 +63,11 @@ function printInfo(info, value) {
  */
 function execCommand(command, args) {
   const { status } = childProcess.spawnSync(command, args, {
-    // cwd: process.cwd(),
-    // env: process.env,
+    cwd: process.cwd(),
+    env: process.env,
     stdio: "inherit",
-    // encoding: "utf-8",
-    // shell: true,
+    encoding: "utf-8",
+    shell: true,
   });
   if (status !== 0) throw new Error(`Error: '${command}' failed`);
 }
@@ -157,7 +157,7 @@ async function gitPush() {
     if (!comment) comment = `Release v${packageJson.version}`;
     console.log("gitPush -> comment", comment);
 
-    execCommand("git", ["commit", "-m", comment]);
+    execCommand("git", ["commit", `-m "${comment}"`]);
     execCommand("git", ["push"]);
     printFooter("Success");
   } catch (error) {
@@ -169,7 +169,7 @@ async function npmPublish() {
   try {
     // NPM publish
     printHeader("Publish package to NPM");
-    execCommand("npm.cmd", ["publish", "--access=public"]);
+    execCommand("npm", ["publish", "--access=public"]);
     printFooter("Success");
   } catch (error) {
     printErrorAndExit(error.message);
@@ -178,7 +178,7 @@ async function npmPublish() {
 
 (async () => {
   isLintAndCompile && lintAndCompile();
-  isBump && (await updateVersion(version));
+  isBump && (await updateVersion(incerment));
   isGit && (await gitPush());
   isNpm && npmPublish();
 
