@@ -62,14 +62,19 @@ function printInfo(info, value) {
  * Execute command on child process
  */
 function execCommand(command, args) {
-  const { status } = childProcess.spawnSync(command, args, {
-    cwd: process.cwd(),
-    env: process.env,
-    stdio: [process.stdin, process.stdout, process.stderr],
-    encoding: "utf-8",
-    shell: true,
-  });
-  if (status !== 0) throw new Error(`Error: '${command}' failed`);
+  // const { status } = childProcess.execSync(command, args, {
+  try {
+    childProcess.execSync(command, {
+      cwd: process.cwd(),
+      env: process.env,
+      stdio: [process.stdin, process.stdout, process.stderr],
+      encoding: "utf-8",
+      shell: true,
+    });
+  } catch (error) {
+    throw new Error(`Error: '${error}' failed`);
+  }
+  // if (status !== 0) throw new Error(`Error: '${command}' failed`);
 }
 
 /***********************************************************
