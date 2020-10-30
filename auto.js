@@ -1,4 +1,3 @@
-const path = require("path");
 const fs = require("fs");
 const childProcess = require("child_process");
 
@@ -34,7 +33,7 @@ console.log(
   "version", version, "\n",
   "isBump", isBump, "\n",
   "isGit", isGit, "\n",
-  "isNpm", isNpm, "\n", "\n");
+  "isNpm", isNpm, "\n");
 
 /***********************************************************
  * Print helpers
@@ -170,33 +169,24 @@ async function gitPush() {
   }
 }
 
-async function publish() {
-  // let gitCommentMsg = await readLineAsync("commit: ");
-
-  // console.log(gitCommentMsg);
-
-  var command = "echo";
-  var args = ["hello", "world"];
-
-  childProcess.spawnSync(command, args, {
-    cwd: process.cwd(),
-    env: process.env,
-    stdio: [process.stdin, process.stdout, process.stderr],
-    encoding: "utf-8",
-    shell: true,
-  });
-
-  process.exit(0);
+async function npmPublish() {
+  try {
+    // NPM publish
+    printHeader("Publish package to NPM");
+    execCommand("npm run publish");
+    printFooter("Success");
+  } catch (error) {
+    printErrorAndExit(error.message);
+  }
 }
 
-// console.log("*********** publish script ***********\n");
-// console.log(__dirname);
-// publish();
+printHeader("Automation script", true);
 
 (async () => {
   isLintAndCompile && lintAndCompile();
   isBump && (await updateVersion(version));
   isGit && (await gitPush());
+  isNpm && npmPublish();
 
   process.exit(0);
 })();
