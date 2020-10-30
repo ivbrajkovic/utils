@@ -27,9 +27,11 @@ myArgs.forEach((arg) => {
     isLintAndCompile = /l:(.+)/.exec(arg)[1] === "true";
 });
 
+printHeader("Automation script", true);
+
 // prettier-ignore
 console.log(
-  "isLintAndCompile", isLintAndCompile, "\n",
+  " isLintAndCompile", isLintAndCompile, "\n",
   "version", version, "\n",
   "isBump", isBump, "\n",
   "isGit", isGit, "\n",
@@ -141,9 +143,8 @@ async function updateVersion(ch) {
 
       // Vrite new version to package.json
       fs.writeFileSync("package.json", JSON.stringify(packageJson));
-      printInfo("'package.json'", "updated");
-    }
-    console.log("Skip updating version\n");
+      printInfo("'package.json'", "updated\n");
+    } else console.log("Skip updating version\n");
   } catch (error) {
     printErrorAndExit(error.message);
   }
@@ -173,14 +174,12 @@ async function npmPublish() {
   try {
     // NPM publish
     printHeader("Publish package to NPM");
-    execCommand("npm run publish");
+    execCommand("npm publish --access public");
     printFooter("Success");
   } catch (error) {
     printErrorAndExit(error.message);
   }
 }
-
-printHeader("Automation script", true);
 
 (async () => {
   isLintAndCompile && lintAndCompile();
