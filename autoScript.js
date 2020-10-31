@@ -126,9 +126,12 @@ async function updateVersion(ch) {
       if (!ch) ch = await readLineAsync("Update version (r|m|p|s): ");
       if (ch === "r" || ch === "R") {
         ver[1] = +ver[1] + 1;
+        ver[2] = 0;
+        ver[3] = 0;
         break;
       } else if (ch === "m" || ch === "M") {
         ver[2] = +ver[2] + 1;
+        ver[3] = 0;
         break;
       } else if (ch === "p" || ch === "P") {
         ver[3] = +ver[3] + 1;
