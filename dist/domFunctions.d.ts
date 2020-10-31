@@ -10,7 +10,7 @@ interface ElementEventObject {
 }
 /**
  * ! Debugging on browser console only
- * Get all html elements registered events
+ * Get HTML element registered events
  *
  * @param {string} - Query sellector
  * @returns - Returns array of events

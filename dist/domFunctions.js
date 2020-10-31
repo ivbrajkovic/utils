@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createElement = exports.getElementEvents = void 0;
 /**
  * ! Debugging on browser console only
- * Get all html elements registered events
+ * Get HTML element registered events
  *
  * @param {string} - Query sellector
  * @returns - Returns array of events
