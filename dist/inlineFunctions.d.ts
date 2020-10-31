@@ -6,11 +6,11 @@
  */
 export declare const isObjectEmpty: (obj?: {}) => boolean;
 /**
- * Delete all child of node
+ * Delete all child of HTML element
  *
- * @param {element} node  - node from who to delete childs
+ * @param {element} element  - node from who to delete childs
  */
-export declare const deleteAll: (node: HTMLElement) => void;
+export declare const deleteAllChild: (element: HTMLElement) => void;
 /**
  * Helper for fetch text
  *

@@ -8,12 +8,12 @@ export const isObjectEmpty = (obj = {}): boolean =>
   !obj || Object.keys(obj).length === 0;
 
 /**
- * Delete all child of node
+ * Delete all child of HTML element
  *
- * @param {element} node  - node from who to delete childs
+ * @param {element} element  - node from who to delete childs
  */
-export const deleteAll = (node: HTMLElement): void => {
-  while (node.firstChild) node.removeChild(node.firstChild);
+export const deleteAllChild = (element: HTMLElement): void => {
+  while (element.firstChild) element.removeChild(element.firstChild);
 };
 
 /**

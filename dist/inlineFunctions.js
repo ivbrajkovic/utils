@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchSimpleJsonAsync = exports.fetchSimpleTextAsync = exports.deleteAll = exports.isObjectEmpty = void 0;
+exports.fetchSimpleJsonAsync = exports.fetchSimpleTextAsync = exports.deleteAllChild = exports.isObjectEmpty = void 0;
 /**
  * Check if an objet is empty
  *
@@ -48,13 +48,13 @@ exports.isObjectEmpty = function (obj) {
     return !obj || Object.keys(obj).length === 0;
 };
 /**
- * Delete all child of node
+ * Delete all child of HTML element
  *
- * @param {element} node  - node from who to delete childs
+ * @param {element} element  - node from who to delete childs
  */
-exports.deleteAll = function (node) {
-    while (node.firstChild)
-        node.removeChild(node.firstChild);
+exports.deleteAllChild = function (element) {
+    while (element.firstChild)
+        element.removeChild(element.firstChild);
 };
 /**
  * Helper for fetch text
