@@ -61,6 +61,7 @@ exports.deleteAll = function (node) {
  *
  * @param {string} url - url
  * @returns {string} - fetched text
+ * @throws Error
  */
 exports.fetchSimpleTextAsync = function (url, opt) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
     switch (_a.label) {
@@ -74,6 +75,7 @@ exports.fetchSimpleTextAsync = function (url, opt) { return __awaiter(void 0, vo
  *
  * @param {string} url - url
  * @returns {any} - fetched JSON object
+ * @throws Error
  */
 exports.fetchSimpleJsonAsync = function (url, opt
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

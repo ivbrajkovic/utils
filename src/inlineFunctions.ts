@@ -21,6 +21,7 @@ export const deleteAll = (node: HTMLElement): void => {
  *
  * @param {string} url - url
  * @returns {string} - fetched text
+ * @throws Error
  */
 export const fetchSimpleTextAsync = async (
   url: string,
@@ -32,6 +33,7 @@ export const fetchSimpleTextAsync = async (
  *
  * @param {string} url - url
  * @returns {any} - fetched JSON object
+ * @throws Error
  */
 export const fetchSimpleJsonAsync = async (
   url: string,

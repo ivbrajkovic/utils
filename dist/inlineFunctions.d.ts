@@ -16,6 +16,7 @@ export declare const deleteAll: (node: HTMLElement) => void;
  *
  * @param {string} url - url
  * @returns {string} - fetched text
+ * @throws Error
  */
 export declare const fetchSimpleTextAsync: (url: string, opt?: RequestInit | undefined) => Promise<string>;
 /**
@@ -23,5 +24,6 @@ export declare const fetchSimpleTextAsync: (url: string, opt?: RequestInit | und
  *
  * @param {string} url - url
  * @returns {any} - fetched JSON object
+ * @throws Error
  */
 export declare const fetchSimpleJsonAsync: (url: string, opt?: RequestInit | undefined) => Promise<any>;
