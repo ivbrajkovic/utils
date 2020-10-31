@@ -4,5 +4,4 @@
  * @param {object} options fetch options
  * @param {fn} cb callback function
  */
-declare const fetchJsonAbortCb: (url: string, options: RequestInit | undefined, cb: (err: Error | null, data?: any) => void) => (() => void);
-export default fetchJsonAbortCb;
+export declare function fetchJsonAbortCb(url: string, options: RequestInit | undefined, cb: (err: Error | null, data?: any) => void): () => void;

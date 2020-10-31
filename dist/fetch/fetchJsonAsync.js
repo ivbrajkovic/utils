@@ -36,15 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.fetchJsonAsync = void 0;
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 /**
  * Fetch JOSN response async
  * @param {string} url rul
  * @param {object} options fetch options
  */
-var fetchJsonAsync = function (url, options) {
+function fetchJsonAsync(url, options) {
     if (options === void 0) { options = {}; }
-    return __awaiter(void 0, void 0, void 0, function () {
+    return __awaiter(this, void 0, void 0, function () {
         var response, contentType, json;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -63,5 +64,5 @@ var fetchJsonAsync = function (url, options) {
             }
         });
     });
-};
-exports.default = fetchJsonAsync;
+}
+exports.fetchJsonAsync = fetchJsonAsync;

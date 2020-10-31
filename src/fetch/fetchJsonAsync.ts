@@ -4,10 +4,10 @@
  * @param {string} url rul
  * @param {object} options fetch options
  */
-const fetchJsonAsync = async (
+export async function fetchJsonAsync(
   url: string,
   options: RequestInit = {}
-): Promise<any> => {
+): Promise<any> {
   const response = await fetch(url, options);
   if (!response.ok) throw new Error(response.status.toString());
 
@@ -19,6 +19,4 @@ const fetchJsonAsync = async (
   // Get JOSN from response
   const json = await response.json();
   return json;
-};
-
-export default fetchJsonAsync;
+}

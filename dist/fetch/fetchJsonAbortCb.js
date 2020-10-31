@@ -12,6 +12,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.fetchJsonAbortCb = void 0;
 var fetchJsonAsync_1 = require("./fetchJsonAsync");
 /**
  * Fetch JSON response with abort feature
@@ -19,11 +20,11 @@ var fetchJsonAsync_1 = require("./fetchJsonAsync");
  * @param {object} options fetch options
  * @param {fn} cb callback function
  */
-var fetchJsonAbortCb = function (url, options, cb) {
+function fetchJsonAbortCb(url, options, cb) {
     if (options === void 0) { options = {}; }
     var abortController = new AbortController();
     var signal = abortController.signal;
-    fetchJsonAsync_1.default(url, __assign(__assign({}, options), { signal: signal }))
+    fetchJsonAsync_1.fetchJsonAsync(url, __assign(__assign({}, options), { signal: signal }))
         .then(function (data) {
         cb && cb(null, data);
     })
@@ -31,5 +32,5 @@ var fetchJsonAbortCb = function (url, options, cb) {
         cb && cb(err);
     });
     return function () { return abortController.abort(); };
-};
-exports.default = fetchJsonAbortCb;
+}
+exports.fetchJsonAbortCb = fetchJsonAbortCb;
