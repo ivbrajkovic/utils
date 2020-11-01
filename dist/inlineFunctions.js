@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchSimpleJsonAsync = exports.fetchSimpleTextAsync = exports.deleteAllChild = exports.isObjectEmpty = void 0;
+exports.randomIntFast = exports.fetchSimpleJsonAsync = exports.fetchSimpleTextAsync = exports.deleteAllChild = exports.isObjectEmpty = void 0;
 /**
  * Check if an objet is empty
  *
@@ -86,3 +86,13 @@ exports.fetchSimpleJsonAsync = function (url, opt
         case 2: return [2 /*return*/, _a.sent()];
     }
 }); }); };
+/**
+ * Generate random integer betweean min and max (fast)
+ * @param {number} min min
+ * @param {number} max max
+ * @param {boolean} included min and max inclusive
+ */
+function randomIntFast(min, max, included) {
+    return ~~(Math.random() * (max - min + (included ? 1 : 0))) + min;
+}
+exports.randomIntFast = randomIntFast;

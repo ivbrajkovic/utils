@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.debounce = void 0;
+exports.random = exports.debounce = void 0;
 /**
  * Debounce function
  * @param {object} func function to call
@@ -27,3 +27,19 @@ function debounce(func, delay) {
     return debounced;
 }
 exports.debounce = debounce;
+/**
+ * Generate random number betweean min and max
+ * @param {number} min min
+ * @param {number} max max
+ * @param {boolean} included min and max inclusive
+ * @param {number} fixed decimal places
+ */
+function random(min, max, included, fixed) {
+    fixed < 0 && (fixed = 0);
+    var offset = included ? 1 : 0;
+    if (!fixed)
+        return Math.floor(Math.random() * (max - min + offset)) + min;
+    var n = Math.random() * (max - min) + min;
+    return +n.toFixed(fixed);
+}
+exports.random = random;

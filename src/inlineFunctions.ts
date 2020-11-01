@@ -40,3 +40,17 @@ export const fetchSimpleJsonAsync = async (
   opt?: RequestInit
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any> => await (await fetch(url, opt)).json();
+
+/**
+ * Generate random integer betweean min and max (fast)
+ * @param {number} min min
+ * @param {number} max max
+ * @param {boolean} included min and max inclusive
+ */
+export function randomIntFast(
+  min: number,
+  max: number,
+  included: false
+): number {
+  return ~~(Math.random() * (max - min + (included ? 1 : 0))) + min;
+}

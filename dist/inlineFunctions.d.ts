@@ -27,3 +27,10 @@ export declare const fetchSimpleTextAsync: (url: string, opt?: RequestInit | und
  * @throws Error
  */
 export declare const fetchSimpleJsonAsync: (url: string, opt?: RequestInit | undefined) => Promise<any>;
+/**
+ * Generate random integer betweean min and max (fast)
+ * @param {number} min min
+ * @param {number} max max
+ * @param {boolean} included min and max inclusive
+ */
+export declare function randomIntFast(min: number, max: number, included: false): number;

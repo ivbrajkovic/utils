@@ -26,3 +26,25 @@ export function debounce(func: Function, delay: number): () => void {
 
   return debounced;
 }
+
+/**
+ * Generate random number betweean min and max
+ * @param {number} min min
+ * @param {number} max max
+ * @param {boolean} included min and max inclusive
+ * @param {number} fixed decimal places
+ */
+export function random(
+  min: number,
+  max: number,
+  included: false,
+  fixed: 0
+): number {
+  fixed < 0 && (fixed = 0);
+  const offset: number = included ? 1 : 0;
+
+  if (!fixed) return Math.floor(Math.random() * (max - min + offset)) + min;
+
+  const n = Math.random() * (max - min) + min;
+  return +n.toFixed(fixed);
+}
