@@ -34,3 +34,28 @@ export declare const fetchSimpleJsonAsync: (url: string, opt?: RequestInit | und
  * @param {boolean} included min and max inclusive
  */
 export declare function randomIntFast(min: number, max: number, included: false): number;
+/**
+ * Convert radian to degree
+ * @param radian radian
+ */
+export declare function radToDeg(radian: number): number;
+/**
+ * Convert degree to radian
+ * @param degree degree
+ */
+export declare function degToRad(degree: number): number;
+/**
+ * Check if number is power of two (bitwise check)
+ * @param value number to check
+ */
+export declare function isPowerOf2(value: number): boolean;
+/**
+ * Round number to one decimal (fast)
+ * @param num
+ */
+export declare function fixToOne(num: number): number;
+/**
+ * Round number to two decimals (fast)
+ * @param num
+ */
+export declare function fixToTwo(num: number): number;

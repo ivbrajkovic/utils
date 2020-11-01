@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.randomIntFast = exports.fetchSimpleJsonAsync = exports.fetchSimpleTextAsync = exports.deleteAllChild = exports.isObjectEmpty = void 0;
+exports.fixToTwo = exports.fixToOne = exports.isPowerOf2 = exports.degToRad = exports.radToDeg = exports.randomIntFast = exports.fetchSimpleJsonAsync = exports.fetchSimpleTextAsync = exports.deleteAllChild = exports.isObjectEmpty = void 0;
 /**
  * Check if an objet is empty
  *
@@ -96,3 +96,43 @@ function randomIntFast(min, max, included) {
     return ~~(Math.random() * (max - min + (included ? 1 : 0))) + min;
 }
 exports.randomIntFast = randomIntFast;
+/**
+ * Convert radian to degree
+ * @param radian radian
+ */
+function radToDeg(radian) {
+    return (radian * 180) / Math.PI;
+}
+exports.radToDeg = radToDeg;
+/**
+ * Convert degree to radian
+ * @param degree degree
+ */
+function degToRad(degree) {
+    return (degree * Math.PI) / 180;
+}
+exports.degToRad = degToRad;
+/**
+ * Check if number is power of two (bitwise check)
+ * @param value number to check
+ */
+function isPowerOf2(value) {
+    return value !== 0 && (value & (value - 1)) == 0;
+}
+exports.isPowerOf2 = isPowerOf2;
+/**
+ * Round number to one decimal (fast)
+ * @param num
+ */
+function fixToOne(num) {
+    return Math.round(num * 10) / 10;
+}
+exports.fixToOne = fixToOne;
+/**
+ * Round number to two decimals (fast)
+ * @param num
+ */
+function fixToTwo(num) {
+    return Math.round(num * 100) / 100;
+}
+exports.fixToTwo = fixToTwo;

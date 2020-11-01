@@ -54,3 +54,43 @@ export function randomIntFast(
 ): number {
   return ~~(Math.random() * (max - min + (included ? 1 : 0))) + min;
 }
+
+/**
+ * Convert radian to degree
+ * @param radian radian
+ */
+export function radToDeg(radian: number): number {
+  return (radian * 180) / Math.PI;
+}
+
+/**
+ * Convert degree to radian
+ * @param degree degree
+ */
+export function degToRad(degree: number): number {
+  return (degree * Math.PI) / 180;
+}
+
+/**
+ * Check if number is power of two (bitwise check)
+ * @param value number to check
+ */
+export function isPowerOf2(value: number): boolean {
+  return value !== 0 && (value & (value - 1)) == 0;
+}
+
+/**
+ * Round number to one decimal (fast)
+ * @param num
+ */
+export function fixToOne(num: number): number {
+  return Math.round(num * 10) / 10;
+}
+
+/**
+ * Round number to two decimals (fast)
+ * @param num
+ */
+export function fixToTwo(num: number): number {
+  return Math.round(num * 100) / 100;
+}
