@@ -18,6 +18,9 @@ deleteAllChild; // Delete all child of HTML element
 /* DOM */
 createElement; // Create a DOM element
 
+/* Other */
+debounce; // Simple debounce with setTimeout
+
 /* Debug (chromium API) */
 getElementEvents; // Get HTML element registered events
 ```

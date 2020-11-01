@@ -6,7 +6,8 @@
       "module": "CommonJS",
       "strict": true,
       "declaration": true,
-      "baseUrl": "./src"
+      "baseUrl": "./src",
+      "noImplicitAny": true
   },
   "include": [
       "src/**/*"
