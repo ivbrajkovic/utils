@@ -34,5 +34,5 @@ getElementEvents; // Get HTML element registered events
 
 ## TODO
 
-1. Add terser script to minify js
+1. Add terser script to minify js :heavy_check_mark:
 2. Add more functions

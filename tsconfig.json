@@ -10,7 +10,7 @@
       "noImplicitAny": true
   },
   "include": [
-      "src/**/*"
-      // "."
+      "./src/**/*",
+      // "index.ts"
   ]
 }

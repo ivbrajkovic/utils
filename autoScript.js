@@ -1,3 +1,6 @@
+// -------------------------------------------------------
+// Imports
+//
 const fs = require("fs");
 const childProcess = require("child_process");
 
@@ -6,39 +9,55 @@ const packageJson = require("./package.json");
 if (!packageJson || !packageJson.version)
   throw new Error("Can't find valid package.json");
 
+// Readline for stdIO
 const readline = require("readline").createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-let incerment;
-let isLintAndCompile = true;
+// Minifing script using Teaser
+const minifyDirectory = require("./minify");
+
+// -------------------------------------------------------
+// Local variables and const
+//
+const DIST_DIR = process.env.AUTO_DIST_DIR || "dist";
+//
+let verIncerment;
+let isLint = true;
+let isCompile = true;
+let isMinify = true;
 let isBump = true;
 let isGit = true;
 let isNpm = true;
-let isDeafultComment = false;
+let isDeafultComment = true;
 
+// -------------------------------------------------------
 // Parse commandline args
+//
 const myArgs = process.argv.slice(2);
 myArgs.forEach((arg) => {
   let match;
-  if ((match = /v:(.)/.exec(arg))) incerment = match[1];
-  else if ((match = /b:(\d)/.exec(arg))) isBump = match[1] === "1";
-  else if ((match = /n:(\d)/.exec(arg))) isNpm = match[1] === "1";
-  else if ((match = /l:(\d)/.exec(arg))) isLintAndCompile = match[1] === "1";
-  else if ((match = /g:(\d):?(\d)?/gm.exec(arg))) {
-    if (!match) return;
+  if ((match = /ver:(.)/.exec(arg))) verIncerment = match[1];
+  else if ((match = /lint:(\d)/.exec(arg))) isLint = match[1] === "1";
+  else if ((match = /comp:(\d)/.exec(arg))) isCompile = match[1] === "1";
+  else if ((match = /min:(\d)/.exec(arg))) isMinify = match[1] === "1";
+  else if ((match = /bump:(\d)/.exec(arg))) isBump = match[1] === "1";
+  else if ((match = /npm:(\d)/.exec(arg))) isNpm = match[1] === "1";
+  else if ((match = /git:(\d):?(\d)?/gm.exec(arg))) {
+    // if (!match) return;
     isGit = match[1] === "1";
     isDeafultComment = match[2] === "1";
   }
 });
 
 printHeader("Automation script");
-
 // prettier-ignore
 console.log(
-  " isLintAndCompile", isLintAndCompile, "\n",
-  "version", incerment, "\n",
+  "isLint", isLint, "\n",
+  "isCompile", isCompile, "\n",
+  "isMinify", isMinify, "\n",
+  "version", verIncerment, "\n",
   "isBump", isBump, "\n",
   "isGit", isGit, "\n",
   "isDeafultComment", isDeafultComment, "\n",
@@ -89,71 +108,80 @@ async function readLineAsync(question) {
   });
 }
 
-/***********************************************************
- * Lint and compile TS
+/**
+ * Delete directory
+ * @param {string} dir Directory to delete
  */
-function lintAndCompile() {
-  try {
-    printHeader("Lint and TS compile");
-    execCommand("npm.cmd", ["run", "lint"]);
-    execCommand("npm.cmd", ["run", "tsc"]);
-    printFooter("Success");
-  } catch (error) {
-    printErrorAndExit(error.message);
-  }
+function deleteDirectory(dir) {
+  fs.rmdirSync(dir, { recursive: true });
+  console.log(`${dir} is deleted!`);
+}
+
+/***********************************************************
+ * Lint TS
+ */
+function lint() {
+  printHeader("Lint and TS compile");
+  execCommand("npm.cmd", ["run", "lint"]);
+  printFooter("Success");
+}
+
+/***********************************************************
+ * Compile TS
+ */
+function compile() {
+  printHeader("Lint and TS compile");
+  execCommand("npm.cmd", ["run", "tsc"]);
+  printFooter("Success");
 }
 
 /***********************************************************
  * Update version in package.json
  */
 async function updateVersion(ch) {
-  if (!/r|m|p|s/.test(ch)) ch = null;
+  printHeader("Bump 'package.json'");
 
-  try {
-    printHeader("Bump 'package.json'");
+  // Get version from package.json
+  const regex = /^(\d+).(\d+).(\d+)$/g;
+  const ver = regex.exec(packageJson.version);
+  if (!ver || ver.length !== 4)
+    throw new Error("Invalid version in package.json");
 
-    // Get version from package.json
-    const regex = /^(\d+).(\d+).(\d+)$/g;
-    const ver = regex.exec(packageJson.version);
-    if (!ver || ver.length !== 4)
-      throw new Error("Invalid version in package.json");
+  printInfo("Current version", packageJson.version);
 
-    printInfo("Current version", packageJson.version);
-
-    let skip = false;
-    for (;;) {
-      // Input version update (r-release, m-minor, p-patch, s-skip)
-      if (!ch) ch = await readLineAsync("Update version (r|m|p|s): ");
-      if (ch === "r" || ch === "R") {
-        ver[1] = +ver[1] + 1;
-        ver[2] = 0;
-        ver[3] = 0;
-        break;
-      } else if (ch === "m" || ch === "M") {
-        ver[2] = +ver[2] + 1;
-        ver[3] = 0;
-        break;
-      } else if (ch === "p" || ch === "P") {
-        ver[3] = +ver[3] + 1;
-        break;
-      } else if (ch === "s" || ch === "S") {
-        skip = true;
-        break;
-      }
+  let skip = false;
+  for (;;) {
+    // Input version update (r-release, m-minor, p-patch, s-skip)
+    if (!/r|m|p|s/.test(ch))
+      ch = await readLineAsync("Update version (r|m|p|s): ");
+    if (ch === "r" || ch === "R") {
+      ver[1] = +ver[1] + 1;
+      ver[2] = 0;
+      ver[3] = 0;
+      break;
+    } else if (ch === "m" || ch === "M") {
+      ver[2] = +ver[2] + 1;
+      ver[3] = 0;
+      break;
+    } else if (ch === "p" || ch === "P") {
+      ver[3] = +ver[3] + 1;
+      break;
+    } else if (ch === "s" || ch === "S") {
+      skip = true;
+      break;
     }
-
-    if (!skip) {
-      // Save new version
-      packageJson.version = `${ver[1]}.${ver[2]}.${ver[3]}`;
-      printInfo("New version", packageJson.version);
-
-      // Vrite new version to package.json
-      fs.writeFileSync("package.json", JSON.stringify(packageJson));
-      printInfo("'package.json'", "updated\n");
-    } else console.log("Skip updating version\n");
-  } catch (error) {
-    printErrorAndExit(error.message);
   }
+
+  if (!skip) {
+    // Save new version
+    packageJson.version = `${ver[1]}.${ver[2]}.${ver[3]}`;
+    printInfo("New version", packageJson.version);
+
+    // Vrite new version to package.json
+    fs.writeFileSync("package.json", JSON.stringify(packageJson));
+    printInfo("'package.json'", "updated\n");
+    //
+  } else console.log("Skip updating version\n");
 }
 
 async function gitPush() {
@@ -192,10 +220,17 @@ async function npmPublish() {
 }
 
 (async () => {
-  isLintAndCompile && lintAndCompile();
-  isBump && (await updateVersion(incerment));
-  isGit && (await gitPush());
-  isNpm && npmPublish();
+  try {
+    deleteDirectory(DIST_DIR);
+    isLint && lint();
+    isCompile && compile();
+    isMinify && (await minifyDirectory(DIST_DIR));
+    isBump && (await updateVersion(verIncerment));
+    isGit && (await gitPush());
+    isNpm && npmPublish();
 
-  process.exit(0);
+    process.exit(0);
+  } catch (error) {
+    printErrorAndExit(error.message);
+  }
 })();
