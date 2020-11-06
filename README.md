@@ -6,12 +6,12 @@ Collection of vanilla JS utility functions ES2015 compatibile
 
 ```js
 /* Fetch */
-fetchJsonAsync; // fetch JSON response
-fetchJsonAbortCb; // fetch JSON response with abort (callback)
+fetchJsonAsync; // Fetch JSON response
+fetchJsonAbortCb; // Fetch JSON response with abort (callback)
 
 /* Inline */
-fetchSimpleTextAsync; // fetch text
-fetchSimpleJsonAsync; // fetch JSON
+fetchSimpleTextAsync; // Fetch text
+fetchSimpleJsonAsync; // Fetch JSON
 isObjectEmpty; // Check if an objet is empty
 deleteAllChild; // Delete all child of HTML element
 randomIntFast; // Generate random integer (~~)
@@ -20,6 +20,7 @@ degToRad; // Convert degree to radian
 isPowerOf2; // Check if number is power of two (bitwise check)
 fixToOne; // Round number to one decimal (fast)
 fixToTwo; // Round number to two decimal (fast)
+trimLeadingZeros; // emove leading 0's from string
 
 /* DOM */
 createElement; // Create a DOM element

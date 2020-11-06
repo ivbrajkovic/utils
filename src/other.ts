@@ -48,3 +48,5 @@ export function random(
   const n = Math.random() * (max - min) + min;
   return +n.toFixed(fixed);
 }
+
+

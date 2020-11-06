@@ -94,3 +94,20 @@ export function fixToOne(num: number): number {
 export function fixToTwo(num: number): number {
   return Math.round(num * 100) / 100;
 }
+
+/**
+ * Log formated JSON to console
+ * @param value Value to print
+ * @param spaces Spaces to indent
+ */
+export function logJson(value: any, spaces = 2): void {
+  console.log(JSON.stringify(value, null, spaces));
+}
+
+/**
+ * Remove leading 0's from string
+ * @param value String
+ */
+export function trimLeadingZeros(value: string): string {
+  return value.replace(/^0+/, "");
+}

@@ -59,3 +59,14 @@ export declare function fixToOne(num: number): number;
  * @param num
  */
 export declare function fixToTwo(num: number): number;
+/**
+ * Log formated JSON to console
+ * @param value Value to print
+ * @param spaces Spaces to indent
+ */
+export declare function logJson(value: any, spaces?: number): void;
+/**
+ * Remove leading 0's from string
+ * @param value String
+ */
+export declare function trimLeadingZeros(value: string): string;
