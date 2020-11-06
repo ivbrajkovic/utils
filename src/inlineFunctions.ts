@@ -111,3 +111,11 @@ export function logJson(value: any, spaces = 2): void {
 export function trimLeadingZeros(value: string): string {
   return value.replace(/^0+/, "");
 }
+
+/**
+ * Pritty print object to console
+ * @param object Object to log
+ */
+export function logObject(object: any): void {
+  console.log(JSON.stringify(object, null, 2));
+}

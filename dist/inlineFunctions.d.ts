@@ -70,3 +70,8 @@ export declare function logJson(value: any, spaces?: number): void;
  * @param value String
  */
 export declare function trimLeadingZeros(value: string): string;
+/**
+ * Pritty print object to console
+ * @param object Object to log
+ */
+export declare function logObject(object: any): void;

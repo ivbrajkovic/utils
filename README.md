@@ -21,6 +21,7 @@ isPowerOf2; // Check if number is power of two (bitwise check)
 fixToOne; // Round number to one decimal (fast)
 fixToTwo; // Round number to two decimal (fast)
 trimLeadingZeros; // emove leading 0's from string
+logObject; // Pritty print object to console
 
 /* DOM */
 createElement; // Create a DOM element
