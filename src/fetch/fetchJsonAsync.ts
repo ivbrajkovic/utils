@@ -1,13 +1,14 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
+
 /**
  * Fetch JOSN response async
- * @param {string} url rul
- * @param {object} options fetch options
+ * @param {RequestInfo} url rul
+ * @param {RequestInit} options fetch options
  */
-export async function fetchJsonAsync(
-  url: string,
+async function fetchJsonAsync(
+  url: RequestInfo,
   options: RequestInit = {}
-): Promise<any> {
+): Promise<Object> {
   const response = await fetch(url, options);
   if (!response.ok) throw new Error(response.status.toString());
 
@@ -20,3 +21,5 @@ export async function fetchJsonAsync(
   const json = await response.json();
   return json;
 }
+
+export default fetchJsonAsync;

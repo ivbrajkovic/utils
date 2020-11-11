@@ -64,7 +64,7 @@ export declare function fixToTwo(num: number): number;
  * @param value Value to print
  * @param spaces Spaces to indent
  */
-export declare function logJson(value: any, spaces?: number): void;
+export declare function logJson(value: Object, spaces?: number): void;
 /**
  * Remove leading 0's from string
  * @param value String
@@ -74,4 +74,4 @@ export declare function trimLeadingZeros(value: string): string;
  * Pritty print object to console
  * @param object Object to log
  */
-export declare function logObject(object: any): void;
+export declare function logObject(object: Object): void;

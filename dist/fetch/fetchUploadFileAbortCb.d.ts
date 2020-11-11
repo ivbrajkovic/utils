@@ -1,7 +1,8 @@
 /**
  * Fetch POST to upload file with abort feature
- * @param {string} url url
+ * @param {RequestInfo} url url
  * @param {string} file path to file
- * @param {fn} cb callback function
+ * @param {Function} cb callback function
  */
-export declare function fetchUploadFileAbortCb(url: string, file: string, cb: (err: Error | null, data?: any) => void): () => void;
+declare function fetchUploadFileAbortCb(url: RequestInfo, file: string, cb: (err: Error | null, data?: Object) => void): () => void;
+export default fetchUploadFileAbortCb;

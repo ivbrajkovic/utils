@@ -1,17 +1,17 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 
-import { fetchJsonAsync } from "./fetchJsonAsync";
+import fetchJsonAsync from "./fetchJsonAsync";
 
 /**
  * Fetch POST to upload file with abort feature
- * @param {string} url url
+ * @param {RequestInfo} url url
  * @param {string} file path to file
- * @param {fn} cb callback function
+ * @param {Function} cb callback function
  */
-export function fetchUploadFileAbortCb(
-  url: string,
+function fetchUploadFileAbortCb(
+  url: RequestInfo,
   file: string,
-  cb: (err: Error | null, data?: any) => void
+  cb: (err: Error | null, data?: Object) => void
 ): () => void {
   const abortController = new AbortController();
   const signal = abortController.signal;
@@ -29,3 +29,5 @@ export function fetchUploadFileAbortCb(
 
   return () => abortController.abort();
 }
+
+export default fetchUploadFileAbortCb;

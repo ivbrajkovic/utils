@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 /**
  * Check if an objet is empty
  *
@@ -100,7 +101,7 @@ export function fixToTwo(num: number): number {
  * @param value Value to print
  * @param spaces Spaces to indent
  */
-export function logJson(value: any, spaces = 2): void {
+export function logJson(value: Object, spaces = 2): void {
   console.log(JSON.stringify(value, null, spaces));
 }
 
@@ -116,6 +117,6 @@ export function trimLeadingZeros(value: string): string {
  * Pritty print object to console
  * @param object Object to log
  */
-export function logObject(object: any): void {
+export function logObject(object: Object): void {
   console.log(JSON.stringify(object, null, 2));
 }
