@@ -6,7 +6,9 @@ Collection of vanilla JS utility functions ES2015 compatibile
 
 ```js
 /* Fetch */
-fetchJsonAsync; // Fetch JSON response
+fetchTextAsync; // Fetch text response async
+fetchTextAbortCb; // Fetch text response with abort (callback)
+fetchJsonAsync; // Fetch JSON response async
 fetchJsonAbortCb; // Fetch JSON response with abort (callback)
 
 /* Inline */
