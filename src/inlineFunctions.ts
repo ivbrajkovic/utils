@@ -127,6 +127,6 @@ export function logObject(object: Object): void {
  * @param length Max length of the string
  * @param ending Optional ending of truncated string
  */
-export function truncStr(str: string, length: number, ending = "..."): string {
+export function truncStr(str = "", length: number, ending = "..."): string {
   return str.length > length ? str.substr(0, length) + ending : str;
 }

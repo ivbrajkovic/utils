@@ -81,4 +81,4 @@ export declare function logObject(object: Object): void;
  * @param length Max length of the string
  * @param ending Optional ending of truncated string
  */
-export declare function truncStr(str: string, length: number, ending?: string): string;
+export declare function truncStr(str: string | undefined, length: number, ending?: string): string;
