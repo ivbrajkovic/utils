@@ -128,5 +128,11 @@ export function logObject(object: Object): void {
  * @param ending Optional ending of truncated string
  */
 export function truncStr(str = "", length = 0, ending = "..."): string {
-  return str.length > length ? str.substr(0, length) + ending : str;
+  return typeof str !== "string" ||
+    typeof length !== "number" ||
+    typeof ending !== "string"
+    ? ""
+    : str.length > length
+    ? str.substr(0, length) + ending
+    : str;
 }
