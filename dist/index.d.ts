@@ -4,6 +4,6 @@ import fetchTextAsync from "./fetch/fetchTextAsync";
 import fetchJsonAbortCb from "./fetch/fetchJsonAbortCb";
 import fetchUploadFileAbortCb from "./fetch/fetchUploadFileAbortCb";
 export * from "./domFunctions";
-export * from "./domFunctions";
+export * from "./inlineFunctions";
 export * from "./other";
-export { fetchJsonAsync, fetchTextAbortCb, fetchTextAsync, fetchJsonAbortCb, fetchUploadFileAbortCb, };
+export { fetchJsonAsync, fetchTextAbortCb, fetchTextAsync, fetchJsonAbortCb, fetchUploadFileAbortCb };
