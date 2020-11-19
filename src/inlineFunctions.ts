@@ -114,9 +114,19 @@ export function trimLeadingZeros(value: string): string {
 }
 
 /**
- * Pritty print object to console
+ * Pretty print object to console
  * @param object Object to log
  */
 export function logObject(object: Object): void {
   console.log(JSON.stringify(object, null, 2));
+}
+
+/**
+ * Truncate string if exceed max length
+ * @param str String to truncate
+ * @param length Max length of the string
+ * @param ending Optional ending of truncated string
+ */
+export function truncStr(str: string, length: number, ending = "..."): string {
+  return str.length > length ? str.substr(0, length) + ending : str;
 }
