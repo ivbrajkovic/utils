@@ -49,4 +49,20 @@ export function random(
   return +n.toFixed(fixed);
 }
 
-
+/**
+ * Truncate string if exceed max length
+ * @param str String to truncate
+ * @param length Max length of the string
+ * @param ending Optional ending of truncated string
+ */
+export function truncStr(str = "", length = 0, ending = "..."): string {
+  if (
+    typeof str !== "string" ||
+    !str.length ||
+    typeof length !== "number" ||
+    typeof ending !== "string"
+  )
+    return "";
+  if (length < 1) return str;
+  return str.length > length ? str.substr(0, length) + ending : str;
+}

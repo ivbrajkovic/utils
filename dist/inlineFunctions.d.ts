@@ -75,10 +75,3 @@ export declare function trimLeadingZeros(value: string): string;
  * @param object Object to log
  */
 export declare function logObject(object: Object): void;
-/**
- * Truncate string if exceed max length
- * @param str String to truncate
- * @param length Max length of the string
- * @param ending Optional ending of truncated string
- */
-export declare function truncStr(str?: string, length?: number, ending?: string): string;

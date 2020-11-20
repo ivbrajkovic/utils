@@ -12,3 +12,10 @@ export declare function debounce(func: Function, delay: number): () => void;
  * @param {number} fixed decimal places
  */
 export declare function random(min: number, max: number, included: false, fixed: 0): number;
+/**
+ * Truncate string if exceed max length
+ * @param str String to truncate
+ * @param length Max length of the string
+ * @param ending Optional ending of truncated string
+ */
+export declare function truncStr(str?: string, length?: number, ending?: string): string;

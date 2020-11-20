@@ -120,19 +120,3 @@ export function trimLeadingZeros(value: string): string {
 export function logObject(object: Object): void {
   console.log(JSON.stringify(object, null, 2));
 }
-
-/**
- * Truncate string if exceed max length
- * @param str String to truncate
- * @param length Max length of the string
- * @param ending Optional ending of truncated string
- */
-export function truncStr(str = "", length = 0, ending = "..."): string {
-  return typeof str !== "string" ||
-    typeof length !== "number" ||
-    typeof ending !== "string"
-    ? ""
-    : str.length > length
-    ? str.substr(0, length) + ending
-    : str;
-}

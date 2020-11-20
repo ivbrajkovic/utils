@@ -24,7 +24,6 @@ fixToOne; // Round number to one decimal (fast)
 fixToTwo; // Round number to two decimal (fast)
 trimLeadingZeros; // Remove leading 0's from string
 logObject; // Pretty print object to console
-truncStr; // Truncate string if exceed max length
 
 /* DOM */
 createElement; // Create a DOM element
@@ -32,6 +31,7 @@ createElement; // Create a DOM element
 /* Other */
 debounce; // Simple debounce with setTimeout
 random; // Generate random number (decimal option)
+truncStr; // Truncate string if exceed max length
 
 /* Debug (chromium API) */
 getElementEvents; // Get HTML element registered events
