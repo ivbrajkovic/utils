@@ -126,5 +126,5 @@ export function logObject(object: Object): void {
  * @param value Number to get absolute value
  */
 export function absValue(n: number): number {
-  return (n ^ (n >>> 31)) - (n >>> 31);
+  return n < 0 ? -n : n;
 }
