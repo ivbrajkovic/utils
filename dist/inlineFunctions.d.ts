@@ -75,3 +75,8 @@ export declare function trimLeadingZeros(value: string): string;
  * @param object Object to log
  */
 export declare function logObject(object: Object): void;
+/**
+ * Absolute value of a 32 bit number (like Math.abs but faster)
+ * @param value Number to get absolute value
+ */
+export declare function absValue(n: number): number;

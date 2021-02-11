@@ -24,6 +24,7 @@ fixToOne; // Round number to one decimal (fast)
 fixToTwo; // Round number to two decimal (fast)
 trimLeadingZeros; // Remove leading 0's from string
 logObject; // Pretty print object to console
+absValue; // Absolute value of a 32 bit number (like Math.abs but faster)
 
 /* DOM */
 createElement; // Create a DOM element

@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-      "outDir": "./dist",
-      "lib": ["DOM","ES2018"],
-      "target": "ES5",
-      "module": "CommonJS",
-      "strict": true,
-      "declaration": true,
-      "baseUrl": "./src",
-      "noImplicitAny": true
+    "outDir": "./dist",
+    "lib": ["DOM", "ES2018"],
+    "target": "ES5",
+    "module": "CommonJS",
+    "strict": true,
+    "declaration": true,
+    "baseUrl": "./src",
+    "noImplicitAny": true
   },
   "include": [
-      "./src/**/*",
-      // "index.ts"
+    "./src/**/*"
+    // "index.ts"
   ]
 }

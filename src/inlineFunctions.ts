@@ -120,3 +120,11 @@ export function trimLeadingZeros(value: string): string {
 export function logObject(object: Object): void {
   console.log(JSON.stringify(object, null, 2));
 }
+
+/**
+ * Absolute value of a 32 bit number (like Math.abs but faster)
+ * @param value Number to get absolute value
+ */
+export function absValue(n: number): number {
+  return (n ^ (n >>> 31)) - (n >>> 31);
+}
