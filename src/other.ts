@@ -5,7 +5,7 @@
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function debounce(func: Function, delay: number): () => void {
-  let timer: number;
+  let timer: null | ReturnType<typeof setTimeout> = null;
 
   // Create debounced version of func
   const debounced = function () {
@@ -14,14 +14,14 @@ export function debounce(func: Function, delay: number): () => void {
     const context: any = this;
     const args = arguments;
     /*eslint-enable */
-    clearTimeout(timer);
+    clearTimeout(timer as ReturnType<typeof setTimeout>);
     timer = setTimeout(() => func.apply(context, args), delay);
   };
 
   // Add clear option
   debounced.clear = function () {
-    clearTimeout(timer);
-    timer = 0;
+    clearTimeout(timer as ReturnType<typeof setTimeout>);
+    timer = null;
   };
 
   return debounced;
@@ -55,14 +55,14 @@ export function random(
  * @param length Max length of the string
  * @param ending Optional ending of truncated string
  */
-export function truncStr(str = "", length = 0, ending = "..."): string {
+export function truncStr(str = '', length = 0, ending = '...'): string {
   if (
-    typeof str !== "string" ||
+    typeof str !== 'string' ||
     !str.length ||
-    typeof length !== "number" ||
-    typeof ending !== "string"
+    typeof length !== 'number' ||
+    typeof ending !== 'string'
   )
-    return "";
+    return '';
   if (length < 1) return str;
   return str.length > length ? str.substr(0, length) + ending : str;
 }
