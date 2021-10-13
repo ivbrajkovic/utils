@@ -1,6 +1,6 @@
 # Vanilla JS Uility Functions
 
-Collection of vanilla JS utility functions ES2015 compatibile
+Collection of vanilla JS utility functions ES2015 compatible
 
 ## Function list
 
@@ -33,6 +33,7 @@ createElement; // Create a DOM element
 debounce; // Simple debounce with setTimeout
 random; // Generate random number (decimal option)
 truncStr; // Truncate string if exceed max length
+makeObservable; // Proxy with set trap
 
 /* Debug (chromium API) */
 getElementEvents; // Get HTML element registered events
