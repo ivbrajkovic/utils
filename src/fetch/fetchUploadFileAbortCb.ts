@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import fetchJsonAsync from "./fetchJsonAsync";
+import fetchJsonAsync from './fetchJsonAsync';
 
 /**
  * Fetch POST to upload file with abort feature
@@ -11,15 +11,15 @@ import fetchJsonAsync from "./fetchJsonAsync";
 function fetchUploadFileAbortCb(
   url: RequestInfo,
   file: string,
-  cb: (err: Error | null, data?: Object) => void
+  cb: (err: Error | null, data?: unknown) => void
 ): () => void {
   const abortController = new AbortController();
   const signal = abortController.signal;
 
   const body = new FormData();
-  body.append("file", file);
+  body.append('file', file);
 
-  fetchJsonAsync(url, { method: "POST", body, signal })
+  fetchJsonAsync(url, { method: 'POST', body, signal })
     .then((data) => {
       cb && cb(null, data);
     })

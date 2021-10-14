@@ -1,19 +1,28 @@
+export type Procedure = (...args: any[]) => any;
+
+export interface DebouncedFunction<F extends Procedure> {
+  (this: ThisParameterType<F>, ...args: Parameters<F>): Promise<ReturnType<F>>;
+  clear: () => void;
+}
+
 /**
  * Debounce function
  * @param {object} func function to call
  * @param {number} delay delay timeout
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function debounce(func: Function, delay: number): () => void {
+export function debounce<F extends Procedure>(
+  func: F,
+  delay: number
+): () => void {
   let timer: null | ReturnType<typeof setTimeout> = null;
 
   // Create debounced version of func
-  const debounced = function () {
-    /*eslint-disable */
-    // @ts-ignore
-    const context: any = this;
-    const args = arguments;
-    /*eslint-enable */
+  const debounced = function (
+    this: ThisParameterType<F>,
+    ...args: Parameters<F>
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const context = this;
     clearTimeout(timer as ReturnType<typeof setTimeout>);
     timer = setTimeout(() => func.apply(context, args), delay);
   };
@@ -28,7 +37,7 @@ export function debounce(func: Function, delay: number): () => void {
 }
 
 /**
- * Generate random number betweean min and max
+ * Generate random number between min and max
  * @param {number} min min
  * @param {number} max max
  * @param {boolean} included min and max inclusive

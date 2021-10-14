@@ -1,12 +1,17 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
+  // "extends": "@tsconfig/recommended/tsconfig.json",
 
   "compilerOptions": {
     "outDir": "./dist",
     "baseUrl": "./src",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true
+    "declaration": true,
+    "declarationDir": "lib/types",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "ESNext"
   },
   "include": [
     "./src/**/*"

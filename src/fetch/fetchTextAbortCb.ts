@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
-import fetchTextAsync from "./fetchTextAsync";
+import fetchTextAsync from './fetchTextAsync';
 
-type Callback = (err: Error | null, data?: Object) => void;
+type Callback = (err: Error | null, text?: string) => void;
 
 /**
  * Fetch JSON response with abort feature
@@ -19,7 +19,7 @@ function fetchJsonAbortCb(
   const signal = abortController.signal;
 
   // eslint-disable-next-line prefer-rest-params
-  if (typeof arguments[1] === "function") cb = arguments[1];
+  if (typeof arguments[1] === 'function') cb = arguments[1];
 
   fetchTextAsync(url, { ...options, signal })
     .then((data) => {

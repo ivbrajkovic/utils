@@ -23,7 +23,7 @@ const DIST_DIR = process.env.AUTO_DIST_DIR || 'dist';
 let verIncrement;
 let isLint = true;
 let isCompile = true;
-let isMinify = true;
+let isMinify = false; // do not minify
 let isBump = true;
 let isGit = true;
 let isNpm = true;
@@ -128,7 +128,7 @@ function lint() {
  */
 function compile() {
   printHeader('Lint and TS compile');
-  execCommand('npm.cmd', ['run', 'tsc']);
+  execCommand('npm.cmd', ['run', 'build:rollup']);
   printFooter('Success');
 }
 

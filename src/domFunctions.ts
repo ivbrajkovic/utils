@@ -1,5 +1,5 @@
 /**
- * DOM utilty functions
+ * DOM utility functions
  */
 
 /**
@@ -7,8 +7,7 @@
  */
 interface ElementEventObject {
   element: Element;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  listeners: Array<any>;
+  listeners: Array<unknown>;
 }
 
 /**
@@ -18,7 +17,6 @@ interface ElementEventObject {
  * @param {string} - Query sellector
  * @returns - Returns array of events
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getElementEvents(selector: string): Array<ElementEventObject> {
   const items = Array.prototype.slice
     .call(document.querySelectorAll(selector))
@@ -59,6 +57,6 @@ export function createElement(
   classes && classes.length >= 0 && el.classList.add(...classes);
   innerHtml && (el.innerHTML = innerHtml);
   text && el.appendChild(document.createTextNode(text));
-  data && data.length >= 0 && el.setAttribute("data-index", data);
+  data && data.length >= 0 && el.setAttribute('data-index', data);
   return el;
 }

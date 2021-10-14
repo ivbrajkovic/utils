@@ -1,17 +1,16 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /**
  * Check if an objet is empty
  *
  * @param {object} obj  - object to check
  * @returns {boolean}   - indicate if object is empty
  */
-export const isObjectEmpty = (obj = {}): boolean =>
+export const isObjectEmpty = (obj: Record<string, unknown> = {}): boolean =>
   !obj || Object.keys(obj).length === 0;
 
 /**
  * Delete all child of HTML element
  *
- * @param {element} element  - node from who to delete childs
+ * @param {element} element  - node from who to delete child
  */
 export const deleteAllChild = (element: HTMLElement): void => {
   while (element.firstChild) element.removeChild(element.firstChild);
@@ -43,7 +42,7 @@ export const fetchSimpleJsonAsync = async (
 ): Promise<any> => await (await fetch(url, opt)).json();
 
 /**
- * Generate random integer betweean min and max (fast)
+ * Generate random integer between min and max (fast)
  * @param {number} min min
  * @param {number} max max
  * @param {boolean} included min and max inclusive
@@ -97,11 +96,11 @@ export function fixToTwo(num: number): number {
 }
 
 /**
- * Log formated JSON to console
+ * Log formatted JSON to console
  * @param value Value to print
  * @param spaces Spaces to indent
  */
-export function logJson(value: Object, spaces = 2): void {
+export function logJson(value: Record<string, unknown>, spaces = 2): void {
   console.log(JSON.stringify(value, null, spaces));
 }
 
@@ -110,14 +109,14 @@ export function logJson(value: Object, spaces = 2): void {
  * @param value String
  */
 export function trimLeadingZeros(value: string): string {
-  return value.replace(/^0+/, "");
+  return value.replace(/^0+/, '');
 }
 
 /**
  * Pretty print object to console
  * @param object Object to log
  */
-export function logObject(object: Object): void {
+export function logObject(object: Record<string, unknown>): void {
   console.log(JSON.stringify(object, null, 2));
 }
 
