@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
+import { terser } from 'rollup-plugin-terser';
 import pkg from './package.json';
 
 export default {
@@ -20,6 +21,16 @@ export default {
     commonjs(),
     typescript({
       useTsconfigDeclarationDir: true,
+    }),
+    terser({
+      compress: false,
+      mangle: false,
+      output: {
+        ecma: 2020,
+        comments: false,
+        beautify: true,
+        indent_level: 2,
+      },
     }),
   ],
 };

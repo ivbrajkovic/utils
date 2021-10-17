@@ -35,7 +35,7 @@ const makeObservableSelect = (observed: IObject): IObserved => {
   observed.observe = function (
     ...handler: [select: Select, callback: CallbackOneParam]
   ) {
-    // TODO Add handler reference check
+    // TODO Add handler reference equality check
     this[handlers].push(handler);
 
     // Remove handler from the list
@@ -48,16 +48,19 @@ const makeObservableSelect = (observed: IObject): IObserved => {
   return new Proxy(observed, {
     set(target, property, value, receiver) {
       const reflectValue = Reflect.get(target, property, receiver);
-      if (value === reflectValue) return true; // Update only if different
+
+      // Update only if different and property is a string
+      if (typeof property === 'symbol' || value === reflectValue) return true;
 
       // Forward the operation to object
       const success = Reflect.set(target, property, value, receiver);
 
       if (success) {
         target[handlers].forEach((handler) => {
-          if (typeof handler[0] === 'function')
-            handler[0](property as string, value);
-          else if (handler[0] === property) handler[1]?.(value);
+          const [first, second] = handler;
+          if (typeof first === 'function') first(property, value);
+          else if (typeof second === 'function' && first === property)
+            second(value);
         });
       }
       return success; // Throw error if false
