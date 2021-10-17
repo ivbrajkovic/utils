@@ -18,7 +18,7 @@ const minifyDirectory = require('./minify');
 // -------------------------------------------------------
 // Local variables and const
 //
-const DIST_DIR = process.env.AUTO_DIST_DIR || 'dist';
+const DIST_DIR = process.env.AUTO_DIST_DIR || 'lib';
 //
 let verIncrement;
 let isLint = true;
